@@ -1,6 +1,20 @@
 {
   "name": "pomodoro",
   "version": "1.0.0",
+  "description": "Node.js tool to provide pomodoro-like timer with beep sound playback that helps controlling AI coding agent reporting frequency.",
+  "author": {
+    "name": "sator-imaging",
+    "url": "https://x.com/sator_imaging"
+  },
+  "license": "MIT",
+  "keywords": [
+    "pomodoro",
+    "timer",
+    "beep",
+    "ai",
+    "coding",
+    "agent"
+  ],
   "type": "module",
   "bin": {
     "pomodoro": "./dist/index.js"
@@ -10,15 +24,6 @@
     "start": "node dist/index.js",
     "test": "jest"
   },
-  "keywords": [
-    "pomodoro",
-    "coding",
-    "agent",
-    "beep"
-  ],
-  "author": "sator-imaging",
-  "license": "MIT",
-  "description": "",
   "devDependencies": {
     "@babel/core": "^7.28.0",
     "@babel/preset-env": "^7.28.0",
