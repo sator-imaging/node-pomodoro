@@ -49,7 +49,12 @@ export class PomodoroApp {
     }
 
     const now = new Date();
-    const targetTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours() + 1, minute, 0, 0);
+    const targetTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), minute, 0, 0);
+
+    // もし指定された時刻が現在時刻より前の場合、次の時間の指定した時刻に設定します。
+    if (targetTime.getTime() <= now.getTime()) {
+      targetTime.setHours(targetTime.getHours() + 1);
+    }
 
     const delayMs = targetTime.getTime() - now.getTime();
 
