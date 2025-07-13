@@ -1,0 +1,9 @@
+!README.md
+!LICENSE.md
+
+**.mp3
+**.md
+
+node_modules
+dist
+dist-test
