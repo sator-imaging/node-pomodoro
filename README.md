@@ -34,6 +34,12 @@ Of course just ignore pull requests from AI is another solution.
 
 
 
+# TODO
+
+- Support direct playback of `https` resource.
+
+
+
 # License
 
 MIT License.
