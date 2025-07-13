@@ -1,8 +1,10 @@
-!README.md
-!LICENSE.md
-
+.*
 **.mp3
 **.md
+
+!README.md
+!LICENSE.md
+!.gitignore
 
 node_modules
 dist
