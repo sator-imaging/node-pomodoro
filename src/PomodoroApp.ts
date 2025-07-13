@@ -49,16 +49,11 @@ export class PomodoroApp {
     }
 
     const now = new Date();
-    const targetTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), minute, 0, 0);
-
-    // もし指定された時刻が現在時刻より前の場合、翌日の同じ時刻に設定します。
-    if (targetTime.getTime() <= now.getTime()) {
-      targetTime.setDate(targetTime.getDate() + 1);
-    }
+    const targetTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours() + 1, minute, 0, 0);
 
     const delayMs = targetTime.getTime() - now.getTime();
 
-    console.log(`${targetTime.toLocaleTimeString()} にタイマーが設定されました。`);
+    console.log(`${targetTime.toLocaleString()} にタイマーが設定されました。`);
 
     await delay(delayMs);
     console.log('時間になりました！');
