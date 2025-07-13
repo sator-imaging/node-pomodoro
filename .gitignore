@@ -5,6 +5,7 @@
 !README.md
 !LICENSE.md
 !.gitignore
+!.github
 
 node_modules
 dist
