@@ -1,6 +1,8 @@
 import { PomodoroApp } from '../PomodoroApp.js';
 describe('PomodoroApp', () => {
+
     return;
+
     beforeEach(() => {
         jest.useFakeTimers();
         jest.spyOn(console, 'log').mockImplementation(() => { });
