@@ -21,8 +21,7 @@ npx pomodoro-beep --at 30 --beep 'myBeep.mp3'
 ```
 
 
-Prevent AI agent annoying you by frequent reports.
-
+How to prevent AI agent annoying you by frequent reports.
 Of course just ignore pull requests from AI is another solution.
 
 ```batch
