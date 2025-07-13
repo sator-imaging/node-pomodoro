@@ -25,7 +25,7 @@ export class WindowsAudioPlayer {
             throw new Error('ファイルパスは必須です。');
         }
 
-        filePath = path.resolve(filePath);
+        filePath = path.resolve(filePath).replaceAll('\\', '/');  // must be posix style path.
 
         // PowerShellコマンドを構築
         // Add-Type -AssemblyName presentationCore は、PowerShellセッション内でWPFのPresentationCoreアセンブリをロードします。
@@ -41,14 +41,17 @@ export class WindowsAudioPlayer {
             param([string]$AudioFilePath)
             Add-Type -AssemblyName presentationCore;
             $player = New-Object System.Windows.Media.MediaPlayer;
-            $player.Open('file://' + $AudioFilePath.Replace('\\', '/')) ;
+            $url = [Uri][System.IO.Path]::GetFullPath($AudioFilePath);
+            echo $url;
+            $player.Open($url);
             $player.Play();
             Start-Sleep -s ($player.NaturalDuration.TimeSpan.TotalSeconds + 1);
             $player.Close();
         `;
 
         try {
-            const { stdout, stderr } = await this.execPromise(`powershell.exe -Command "${powershellCommand}" -AudioFilePath "${filePath}"`);
+            const { stdout, stderr } = await this.execPromise(
+                `powershell.exe -Command "& { ${powershellCommand.replace(/\r?\n/g, ' ')} }" -AudioFilePath '${filePath}'`);
             if (stderr) {
                 throw new Error(`PowerShellエラー: ${stderr}`);
             }
