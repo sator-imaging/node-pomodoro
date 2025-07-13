@@ -2,6 +2,7 @@
  * ポモドーロタイマーアプリケーションのコアロジックを管理するクラス。
  */
 import { WindowsAudioPlayer } from './WindowsAudioPlayer.js';
+import playSound from 'play-sound';
 
 /**
  * 指定されたミリ秒数だけ遅延します。
@@ -23,9 +24,14 @@ export class PomodoroApp {
 
   private async _playBeep(): Promise<void> {
     if (this._beepFilePath) {
-      const player = new WindowsAudioPlayer();
       try {
-        await player.play(this._beepFilePath);
+        if (process.platform === 'win32') {
+          const player = new WindowsAudioPlayer();
+          await player.play(this._beepFilePath);
+        }
+        else {
+          playSound().play(this._beepFilePath);
+        }
       } catch (error: any) {
         console.error(`ビープ音の再生中にエラーが発生しました: ${error.message}`);
       }
@@ -65,8 +71,8 @@ export class PomodoroApp {
    * @throws {Error} minutes が無効な場合にスローされます。
    */
   public async startFor(minutes: number): Promise<void> {
-    if (minutes <= 0) {
-      throw new Error('minutes は 0 より大きい値である必要があります。');
+    if (minutes < 0) {
+      throw new Error('minutes は 0 またはそれより大きい値である必要があります。');
     }
 
     const delayMs = minutes * 60 * 1000; // 分をミリ秒に変換
