@@ -1,5 +1,6 @@
 [![npmjs.com](https://img.shields.io/npm/v/pomodoro-beep)](https://www.npmjs.com/package/pomodoro-beep)
-
+&nbsp;
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/sator-imaging/node-pomodoro)
 
 
 # How to Use
