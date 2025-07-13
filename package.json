@@ -1,6 +1,6 @@
 {
   "name": "pomodoro",
-  "version": "1.0.0",
+  "version": "1.0.0-rc.1",
   "description": "Node.js tool to provide pomodoro-like timer with beep sound playback that helps controlling AI coding agent reporting frequency.",
   "author": {
     "name": "sator-imaging",
