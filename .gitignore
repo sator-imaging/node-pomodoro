@@ -6,6 +6,7 @@
 !LICENSE.md
 !.gitignore
 !.github
+!.npmignore
 
 node_modules
 dist
