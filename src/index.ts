@@ -3,6 +3,8 @@ import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import { PomodoroApp } from './PomodoroApp.js';
 import { readFileSync } from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 /**
  * メインエントリポイント
@@ -28,7 +30,7 @@ async function main(): Promise<void> {
     })
     .help('h')
     .alias('h', 'help')
-    .version('v', JSON.parse(readFileSync('./package.json', 'utf8')).version)
+    .version('v', JSON.parse(readFileSync(path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../package.json'), 'utf8')).version)
     .alias('v', 'version')
     .check((argv) => {
       if (typeof argv.at !== 'number' && typeof argv.for !== 'number') {
