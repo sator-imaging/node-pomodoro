@@ -6,7 +6,7 @@
 # How to Use
 
 ```sh
-npx pomodoro-beep --at 0  # set timer at the next 10 minutes mark.
+npx pomodoro-beep --at 10  # set timer at the next 10 minutes mark.
 ```
 
 ```sh
@@ -28,10 +28,10 @@ Of course just ignore pull requests from AI is another solution.
 :LOOP
 
     :: your coding agent cli command
-    my-coding-agent --prompt 'solve GitHub issues.'
+    my-coding-agent --prompt "solve GitHub open issues."
 
     :: report every hour, not frequent.
-    npx pomodoro-beep --at 30 --beep 'myBeep.mp3'
+    npx pomodoro-beep --at 30 --beep "myBeep.mp3"
 
     goto :LOOP
 ```
@@ -41,6 +41,7 @@ Of course just ignore pull requests from AI is another solution.
 # TODO
 
 - Support direct playback of `https` resource.
+- Message text internationalization.
 
 
 
