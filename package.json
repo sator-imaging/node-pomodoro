@@ -5,7 +5,7 @@
     "pomodoro-beep": "./bundle/bundle.cjs"
   },
   "scripts": {
-    "build": "tsc && npx webpack -- --mode production",
+    "build": "tsc && npx -y webpack -- --mode production",
     "prod": "npm run build && node ./bundle/bundle.cjs",
     "start": "tsc && node ./dist/index.js",
     "test": "jest"
