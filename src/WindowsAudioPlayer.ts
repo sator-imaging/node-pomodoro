@@ -25,8 +25,22 @@ export class WindowsAudioPlayer {
             throw new Error('ファイルパスは必須です。');
         }
 
+        filePath = filePath.replace('^', '');  // must remove escape char '^' that automatically added.
         filePath = path.resolve(filePath).replaceAll('\\', '/');  // must be posix style path.
 
+        try {
+            const { stdout, stderr } = await this.execPromise(
+                `powershell.exe -Command "& { ${this.getPowerShellCommand()} }" -AudioFilePath '${filePath}'`);
+            if (stderr) {
+                throw new Error(`PowerShellエラー: ${stderr}`);
+            }
+            return stdout;
+        } catch (error: any) {
+            throw new Error(`音声ファイルの再生に失敗しました: ${error.message}`);
+        }
+    }
+
+    private getPowerShellCommand(): string {
         // PowerShellコマンドを構築
         // Add-Type -AssemblyName presentationCore は、PowerShellセッション内でWPFのPresentationCoreアセンブリをロードします。
         // これにより、System.Windows.Media.MediaPlayerクラスを使用できるようになります。
@@ -37,27 +51,18 @@ export class WindowsAudioPlayer {
         // Start-Sleep -s ($player.NaturalDuration.TimeSpan.TotalSeconds + 1) は、音声ファイルの再生が終了するまでPowerShellスクリプトを一時停止します。
         // +1秒は、再生終了とスクリプト終了の間のわずかな遅延を考慮するためです。
         // $player.Close() は、MediaPlayerオブジェクトを閉じ、関連するリソースを解放します。
-        const powershellCommand = `
-            param([string]$AudioFilePath)
-            Add-Type -AssemblyName presentationCore;
-            $player = New-Object System.Windows.Media.MediaPlayer;
-            $url = [Uri][System.IO.Path]::GetFullPath($AudioFilePath);
-            echo $url;
-            $player.Open($url);
-            $player.Play();
-            Start-Sleep -s ($player.NaturalDuration.TimeSpan.TotalSeconds + 1);
-            $player.Close();
-        `;
+        const powerShellCommand = `
+param([string]$AudioFilePath);
+Add-Type -AssemblyName presentationCore;
+$player = New-Object System.Windows.Media.MediaPlayer;
+$url = [Uri][System.IO.Path]::GetFullPath($AudioFilePath);
+echo $url;
+$player.Open($url);
+$player.Play();
+Start-Sleep -s ($player.NaturalDuration.TimeSpan.TotalSeconds + 1);
+$player.Close();
+`;
 
-        try {
-            const { stdout, stderr } = await this.execPromise(
-                `powershell.exe -Command "& { ${powershellCommand.replace(/\r?\n/g, ' ')} }" -AudioFilePath '${filePath}'`);
-            if (stderr) {
-                throw new Error(`PowerShellエラー: ${stderr}`);
-            }
-            return stdout;
-        } catch (error: any) {
-            throw new Error(`音声ファイルの再生に失敗しました: ${error.message}`);
-        }
+        return powerShellCommand.trim().replace(/\r?\n/g, ' ');
     }
 }
