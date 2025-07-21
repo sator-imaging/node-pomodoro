@@ -2,11 +2,11 @@
   "version": "1.1.0",
   "name": "pomodoro-beep",
   "bin": {
-    "pomodoro-beep": "./bundle/bundle.cjs"
+    "pomodoro-beep": "./bundle/bundle.js"
   },
   "scripts": {
-    "build": "tsc && npx -y webpack-cli -- --mode production",
-    "prod": "npm run build && node ./bundle/bundle.cjs",
+    "build": "tsc && npx -y npx rollup -c",
+    "prod": "npm run build && node ./bundle/bundle.js",
     "start": "tsc && node ./dist/index.js",
     "test": "jest"
   },
@@ -38,6 +38,6 @@
     "@types/node": "^24.0.13",
     "@types/play-sound": "^1.1.2",
     "@types/yargs": "^17.0.33",
-    "webpack-node-externals": "^3.0.0"
+    "rollup-plugin-terser": "^7.0.2"
   }
 }

@@ -1,6 +1,7 @@
 **/*
 
-!dist/**
+!bundle/**
+
 !README.md
 !LICENSE.md
 !package.json
