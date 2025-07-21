@@ -11,6 +11,7 @@ export default {
     format: 'esm',
     sourcemap: false,
     compact: true,
+    banner: '#!/usr/bin/env node',  // prepend shebang in bundle.js
   },
   external: id => /node_modules/.test(id), // node_modules は外部化
   // external: [],
