@@ -1,9 +1,15 @@
 {
+  "version": "1.1.0-rc.1",
   "name": "pomodoro-beep",
   "bin": {
-    "pomodoro-beep": "./dist/index.js"
+    "pomodoro-beep": "./bundle/bundle.cjs"
   },
-  "version": "1.0.3",
+  "scripts": {
+    "build": "tsc && npx webpack -- --mode production",
+    "prod": "npm run build && node ./bundle/bundle.cjs",
+    "start": "tsc && node ./dist/index.js",
+    "test": "jest"
+  },
   "description": "Node.js tool to provide pomodoro-like timer with beep sound playback that helps controlling AI coding agent reporting frequency.",
   "author": {
     "name": "sator-imaging",
@@ -24,25 +30,14 @@
     "agent"
   ],
   "type": "module",
-  "scripts": {
-    "build": "tsc",
-    "start": "node dist/index.js",
-    "test": "jest"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.28.0",
-    "@babel/preset-env": "^7.28.0",
-    "@types/jest": "^30.0.0",
-    "@types/node": "^24.0.13",
-    "@types/play-sound": "^1.1.2",
-    "@types/yargs": "^17.0.33",
-    "babel-jest": "^30.0.4",
-    "jest": "^30.0.4",
-    "ts-jest": "^29.4.0",
-    "typescript": "^5.8.3"
-  },
   "dependencies": {
     "play-sound": "^1.1.6",
     "yargs": "^18.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.13",
+    "@types/play-sound": "^1.1.2",
+    "@types/yargs": "^17.0.33",
+    "webpack-node-externals": "^3.0.0"
   }
 }
