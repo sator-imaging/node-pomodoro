@@ -5,10 +5,10 @@
     "pomodoro-beep": "./bundle/bundle.js"
   },
   "scripts": {
-    "build": "tsc && npx -y rollup -c",
+    "build": "tsc && npx rollup -c",
     "prod": "npm run build && node ./bundle/bundle.js",
     "start": "tsc && node ./dist/index.js",
-    "test": "jest"
+    "test": "npx jest"
   },
   "description": "Node.js tool to provide pomodoro-like timer with beep sound playback that helps controlling AI coding agent reporting frequency.",
   "author": {

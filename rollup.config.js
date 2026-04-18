@@ -31,8 +31,8 @@ export default {
       },
       compress: {
         passes: 3, // 複数回圧縮
-        drop_console: true,
-        pure_funcs: ['console.info', 'console.debug', 'console.warn'],
+        // drop_console: true,  // remove all console funcs
+        pure_funcs: ['console.log', 'console.debug', 'console.warn'],
       },
       format: {
         comments: false

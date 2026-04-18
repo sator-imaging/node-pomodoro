@@ -19,9 +19,14 @@ jobs:
         with:
           node-version: 24
           registry-url: https://registry.npmjs.org/
+
       - run: npm ci
+      - run: npm i -D rollup
+      - run: npm i -D jest
+
       #- run: npm test
       - run: npm run build
+
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
